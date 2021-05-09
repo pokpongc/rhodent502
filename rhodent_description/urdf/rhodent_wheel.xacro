@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<robot name="RhodentWheel" xmlns:xacro="http://www.ros.org/wiki/xacro">
+    
+    <xacro:include filename="$(find rhodent_description)/urdf/rhodent_properties.xacro" />
+    
+    <xacro:macro name="rhodent_wheel" params="name parent translation rotation color rotate">
+
+        <link name="${name}">
+            <inertial>
+                <origin rpy="0 0 0" xyz="0 0 0"/>
+                <mass value="0.11" />
+                <inertia ixx="0.000032052" ixy="0.000032052" ixz="0.000032052" iyy="0.000032052" iyz="0.0000032052" izz="0.000059397"/>
+            </inertial>
+            <visual>
+                <origin rpy="${rotate} 0 0" xyz="0 0 0"/>
+                <geometry>
+                    <mesh filename="package://rhodent_description/meshes/wheel.STL" scale="1 1 1"/>
+                </geometry>
+                <material name="${color}"/>
+            </visual>
+            <collision name="collision">
+                <origin rpy="0 0 0" xyz="0 0 0"/>
+                <geometry>
+                    <cylinder radius = "${WHEEL_RADIUS}" length = "0.0175"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <joint name="${name}_joint" type="continuous">
+            <origin xyz="${translation}" rpy="${rotation}"/>
+            <parent link="${parent}" />
+            <child link="${name}" />
+            <axis xyz="0 0 1" />
+            <limit effort="${U_MAX}" velocity="${V_MAX}" />
+            <dynamics damping="${WHEEL_JOINT_DAMP}" />
+        </joint>
+
+        <gazebo reference="${name}">
+            <mu1>0.001</mu1>
+            <mu2>0.001</mu2>		
+            <material>Gazebo/Grey</material>
+        </gazebo>
+
+
+        <transmission name="${name}_trans">
+            <type>transmission_interface/SimpleTransmission</type>
+            <joint name="${name}_joint">
+                <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            </joint>
+            <actuator name="${name}_motor">
+                <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+        </transmission>
+
+    </xacro:macro>
+</robot>

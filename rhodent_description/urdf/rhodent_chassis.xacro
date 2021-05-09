@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<robot name="RhodentChassis" xmlns:xacro="http://www.ros.org/wiki/xacro">
+    
+    <xacro:include filename="$(find rhodent_description)/urdf/rhodent_properties.xacro" />
+    
+    <xacro:macro name="rhodent_chassis" params="name parent color">
+
+        <link name="${name}_footprint"/>
+
+        <link name="${name}_link">
+            <inertial>
+                <origin rpy="0.0 0 0" xyz="${CHASSIS_COM}"/>
+                <mass value="${CHASSIS_M}" />
+                <inertia ixx="${CHASSIS_Ixx}" ixy="${CHASSIS_Ixy}" ixz="${CHASSIS_Ixz}" iyy="${CHASSIS_Iyy}" iyz="${CHASSIS_Iyz}" izz="${CHASSIS_Izz}"/>
+            </inertial>
+            <visual>
+                <origin rpy="0.0 0 0" xyz="0 0 0"/>
+                <geometry>
+                    <mesh filename="package://rhodent_description/meshes/chassis.STL" scale="1 1 1"/>
+                </geometry>
+                <material name="${color}"/>
+            </visual>
+            <collision name="collision">
+                <origin rpy="0 0 0" xyz="-0.02 0 0.12"/>
+                <geometry>
+                    <cylinder radius = "0.089" length = "0.290"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <link name="${name}_caster">
+            <visual>
+                <origin rpy="0.0 0 0" xyz="0 0 0"/>
+                <geometry>
+                    <sphere radius="0.00635"/>
+                </geometry>
+                <material name="${color}"/>
+            </visual>
+            <collision name="collision">
+                <origin rpy="0 0 0" xyz="0 0 0"/>
+                <geometry>
+                    <sphere radius="0.00635"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <link name="${name}_fcaster">
+            <visual>
+                <origin rpy="0.0 0 0" xyz="0 0 0"/>
+                <geometry>
+                    <sphere radius="0.00635"/>
+                </geometry>
+                <material name="${color}"/>
+            </visual>
+            <collision name="collision">
+                <origin rpy="0 0 0" xyz="0 0 0"/>
+                <geometry>
+                    <sphere radius="0.00635"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <!-- <joint name="${parent}_to_${name}_footprint" type="fixed">
+            <parent link="${parent}"/>
+            <child link="${name}_footprint"/>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+        </joint> -->
+
+        <joint name="${name}_footprint_to_${name}_link" type="fixed">
+            <parent link="${name}_footprint"/>
+            <child link="${name}_link"/>
+            <origin rpy="0 0 0" xyz="0 0 ${FLOOR_TO_BASE}"/>
+        </joint>
+
+        <joint name="${name}_link_to_${name}_caster" type="fixed">
+            <parent link="${name}_link"/>
+            <child link="${name}_caster"/>
+            <origin rpy="0 0 0" xyz="-0.101 0 -0.02592"/>
+        </joint>
+
+        <joint name="${name}_link_to_${name}_fcaster" type="fixed">
+            <parent link="${name}_link"/>
+            <child link="${name}_fcaster"/>
+            <origin rpy="0 0 0" xyz="0.03723 0 -0.0243"/>
+        </joint>
+
+        <gazebo reference="${name}_link">
+            <mu1>0.05</mu1>
+            <mu2>0.05</mu2>		
+            <material>Gazebo/Grey</material>
+        </gazebo>
+
+        <gazebo reference="${name}_caster">
+            <mu1>0</mu1>
+            <mu2>0</mu2>		
+            <material>Gazebo/Grey</material>
+        </gazebo>
+
+        <gazebo reference="${name}_fcaster">
+            <mu1>0</mu1>
+            <mu2>0</mu2>		
+            <material>Gazebo/Grey</material>
+        </gazebo>
+
+    </xacro:macro>
+</robot>

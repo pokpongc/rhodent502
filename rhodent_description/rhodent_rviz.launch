@@ -1,0 +1,15 @@
+<launch>
+    <arg name="gui" default="True"/>
+    <param name="use_gui" value="$(arg gui)"/>
+
+    <param name="robot_description" command="$(find xacro)/xacro $(find rhodent_description)/urdf/rhodent.xacro" />
+
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+        <rosparam param="source_list">["/joint_states"]</rosparam>
+    </node>
+
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+
+    <node name="rviz" pkg="rviz" type="rviz" args = "-d $(find rhodent_description)/launch/rhodent_simple.rviz"/>
+
+</launch>

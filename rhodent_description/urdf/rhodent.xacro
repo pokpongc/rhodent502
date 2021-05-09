@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<robot name="Rhodent502" xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <static>false</static>
+    <gazebo>
+        <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+            <robotNamespace>/rhodent</robotNamespace>
+        </plugin>
+    </gazebo>
+
+    <material name="dark_grey">
+        <color rgba="0.4 0.4 0.4 1"/>
+    </material>
+
+    <material name="aluminium">
+        <color rgba="0.7 0.7 0.7 1"/>
+    </material>
+
+    <xacro:include filename="$(find rhodent_description)/urdf/rhodent_properties.xacro" />
+    <xacro:include filename="$(find rhodent_description)/urdf/rhodent_wheel.xacro" />
+    <xacro:include filename="$(find rhodent_description)/urdf/rhodent_chassis.xacro" />
+
+    <!-- <link name="world"/> -->
+
+    <xacro:rhodent_chassis 
+        name = "base" 
+        parent = "world" 
+        color = "dark_grey"/>
+    <xacro:rhodent_wheel 
+        name = "right_wheel" 
+        parent = "base_link" 
+        translation = "${RIGHT_WHEEL_TRANSL}" 
+        rotation = "${RIGHT_WHEEL_ROT}" 
+        color = "aluminium" 
+        rotate = "0"/>
+    <xacro:rhodent_wheel 
+        name = "left_wheel"
+        parent = "base_link" 
+        translation = "${LEFT_WHEEL_TRANSL}" 
+        rotation = "${LEFT_WHEEL_ROT}" 
+        color = "aluminium" 
+        rotate = "${PI}"/>
+
+
+</robot>
