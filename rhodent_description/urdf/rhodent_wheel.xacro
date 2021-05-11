@@ -36,13 +36,12 @@
         </joint>
 
         <gazebo reference="${name}">
-            <mu1>0.7</mu1>
-            <mu2>0.7</mu2>
+            <mu1>0.8</mu1>
+            <mu2>0.8</mu2>
             <slip1>0.2</slip1>
             <slip2>0.2</slip2>		
             <material>Gazebo/Grey</material>
         </gazebo>
-
 
         <transmission name="${name}_trans">
             <type>transmission_interface/SimpleTransmission</type>

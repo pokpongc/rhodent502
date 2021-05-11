@@ -14,6 +14,7 @@
     <xacro:property name="RIGHT_WHEEL_ROT" value="-${PId2} 0 0"/>
     <xacro:property name="LEFT_WHEEL_TRANSL" value="0 0.101 0"/>
     <xacro:property name="LEFT_WHEEL_ROT" value="-${PId2} 0 0"/>
+    <xacro:property name="CHASSIS_TO_LIDAR" value="-0.02307 0 0.1341"/>
 
     <!-- Joint Properties -->
     <xacro:property name="U_MAX" value="10.0"/> 

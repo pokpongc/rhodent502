@@ -18,7 +18,9 @@
     <xacro:include filename="$(find rhodent_description)/urdf/rhodent_properties.xacro"/>
     <xacro:include filename="$(find rhodent_description)/urdf/rhodent_wheel.xacro" />
     <xacro:include filename="$(find rhodent_description)/urdf/rhodent_chassis.xacro"/>
+    <xacro:include filename="$(find rhodent_description)/urdf/rplidar_a1.xacro"/>
 
+    
     <link name="odom"/>
 
     <xacro:rhodent_chassis 
@@ -39,6 +41,11 @@
         rotation = "${LEFT_WHEEL_ROT}" 
         color = "aluminium" 
         rotate = "${PI}"/>
-
+    <xacro:rplidar_a1 
+        prefix = "top" 
+        parent = "base_link" 
+        offset_from_parent = "${CHASSIS_TO_LIDAR}"
+        visualize = "true"
+        color = "dark_grey"/>
 
 </robot>
