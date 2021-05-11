@@ -19,11 +19,11 @@
     <xacro:include filename="$(find rhodent_description)/urdf/rhodent_wheel.xacro" />
     <xacro:include filename="$(find rhodent_description)/urdf/rhodent_chassis.xacro"/>
 
-    <link name="map"/>
+    <link name="odom"/>
 
     <xacro:rhodent_chassis 
         name = "base" 
-        parent = "map" 
+        parent = "odom" 
         color = "dark_grey"/>
     <xacro:rhodent_wheel 
         name = "right_wheel" 
