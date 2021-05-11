@@ -60,11 +60,11 @@
             </collision>
         </link>
 
-        <!-- <joint name="${parent}_to_${name}_footprint" type="fixed">
+        <joint name="${parent}_to_${name}_footprint" type="fixed">
             <parent link="${parent}"/>
             <child link="${name}_footprint"/>
             <origin rpy="0 0 0" xyz="0 0 0"/>
-        </joint> -->
+        </joint>
 
         <joint name="${name}_footprint_to_${name}_link" type="fixed">
             <parent link="${name}_footprint"/>
@@ -85,20 +85,24 @@
         </joint>
 
         <gazebo reference="${name}_link">
-            <mu1>0.05</mu1>
-            <mu2>0.05</mu2>		
+            <mu1>0.5</mu1>
+            <mu2>0.5</mu2>		
             <material>Gazebo/Grey</material>
         </gazebo>
 
         <gazebo reference="${name}_caster">
             <mu1>0</mu1>
-            <mu2>0</mu2>		
+            <mu2>0</mu2>
+            <slip1>1.0</slip1>
+            <slip2>1.0</slip2>		
             <material>Gazebo/Grey</material>
         </gazebo>
 
         <gazebo reference="${name}_fcaster">
             <mu1>0</mu1>
-            <mu2>0</mu2>		
+            <mu2>0</mu2>
+            <slip1>1.0</slip1>
+            <slip2>1.0</slip2>			
             <material>Gazebo/Grey</material>
         </gazebo>
 

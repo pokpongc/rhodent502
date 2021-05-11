@@ -7,8 +7,10 @@
 
 	<!-- Geometric Properties -->
     <xacro:property name="WHEEL_RADIUS" value="0.03225"/>
+    <xacro:property name="WHEEL_SEPARATION" value="0.202"/>
 	<xacro:property name="BELLY_HEIGHT" value="0.00525"/>
-    <xacro:property name="FLOOR_TO_BASE" value="0.03225"/>
+    <!-- <xacro:property name="FLOOR_TO_BASE" value="0.03225"/> -->
+    <xacro:property name="FLOOR_TO_BASE" value="0.14225"/>
     <xacro:property name="RIGHT_WHEEL_TRANSL" value="0 -0.101 0"/>
     <xacro:property name="RIGHT_WHEEL_ROT" value="-${PId2} 0 0"/>
     <xacro:property name="LEFT_WHEEL_TRANSL" value="0 0.101 0"/>
@@ -17,10 +19,10 @@
     <!-- Joint Properties -->
     <xacro:property name="U_MAX" value="3.0"/> 
     <xacro:property name="V_MAX" value="12.0"/>
-    <xacro:property name="WHEEL_JOINT_DAMP" value="0.02"/>
+    <xacro:property name="WHEEL_JOINT_DAMP" value="0.3"/>
 
     <!-- Inertial Properties -->
-    <xacro:property name="CHASSIS_COM" value="-0.02718 -0.00201 -0.02"/>
+    <xacro:property name="CHASSIS_COM" value="-0.02718 -0.00201 -0.002"/>
     <xacro:property name="CHASSIS_Ixx" value="0.009607873"/>
     <xacro:property name="CHASSIS_Iyy" value="0.010242986"/>
     <xacro:property name="CHASSIS_Izz" value="0.009654254"/>
@@ -30,12 +32,12 @@
     <xacro:property name="CHASSIS_M" value="1.6015"/>
 
     <xacro:property name="WHEEL_COM" value="0 0 -0.00039"/>
-    <xacro:property name="WHEEL_Ixx" value="0.000032052"/>
-    <xacro:property name="WHEEL_Iyy" value="0.000032052"/>
-    <xacro:property name="WHEEL_Izz" value="0.000059397"/>
-    <xacro:property name="WHEEL_Ixy" value="0.000000001"/>
-    <xacro:property name="WHEEL_Iyz" value="0.000000001"/>
-    <xacro:property name="WHEEL_Ixz" value="0.000000001"/>
+    <xacro:property name="WHEEL_Ixx" value="0.00012052"/>
+    <xacro:property name="WHEEL_Iyy" value="0.00012052"/>
+    <xacro:property name="WHEEL_Izz" value="0.0029397"/>
+    <xacro:property name="WHEEL_Ixy" value="0.0"/>
+    <xacro:property name="WHEEL_Iyz" value="0.0"/>
+    <xacro:property name="WHEEL_Ixz" value="0.0"/>
     <xacro:property name="WHEEL_M" value="0.11"/>
 
 </robot>

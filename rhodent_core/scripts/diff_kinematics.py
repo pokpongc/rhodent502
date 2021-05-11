@@ -22,12 +22,12 @@ WHEEL_RADIUS = 0.03225
 
 def twist_to_wheel_vel(twist):
     heading_vel = twist.linear.x
-    ang_vel = twist.linear.z
+    ang_vel = twist.angular.z
 
     r_cmd_vel = (heading_vel+ang_vel*CENTER_TO_WHEEL/2)/WHEEL_RADIUS
     l_cmd_vel = (heading_vel-ang_vel*CENTER_TO_WHEEL/2)/WHEEL_RADIUS
 
-    # print (r_cmd_vel, l_cmd_vel)
+    print (r_cmd_vel, l_cmd_vel)
 
     right_wheel_cmd.publish(r_cmd_vel)
     left_wheel_cmd.publish(l_cmd_vel)
