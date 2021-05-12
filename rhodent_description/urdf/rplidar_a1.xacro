@@ -3,7 +3,7 @@
     
     <xacro:include filename="$(find rhodent_description)/urdf/rhodent_properties.xacro" />
     
-    <xacro:macro name="rplidar_a1" params="prefix parent offset_from_parent visualize color">
+    <xacro:macro name="rplidar_a1" params="prefix parent offset_from_parent visualize color topic">
         <joint name="${prefix}_rplidar_joint" type="fixed">
             <origin xyz="${offset_from_parent}" rpy="0 0 0"/>
             <parent link="${parent}"/>
@@ -57,7 +57,7 @@
                     </noise>
                 </ray>
                 <plugin name="gazebo_ros_${prefix}_lidar" filename="libgazebo_ros_laser.so">
-                    <topicName>/rhodent/${prefix}_laser/scan</topicName>
+                    <topicName>${topic}</topicName>
                     <frameName>${prefix}_rplidar_link</frameName>
                 </plugin>
             </sensor>

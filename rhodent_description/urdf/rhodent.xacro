@@ -19,9 +19,16 @@
     <xacro:include filename="$(find rhodent_description)/urdf/rhodent_wheel.xacro" />
     <xacro:include filename="$(find rhodent_description)/urdf/rhodent_chassis.xacro"/>
     <xacro:include filename="$(find rhodent_description)/urdf/rplidar_a1.xacro"/>
-
+    <xacro:include filename="$(find rhodent_description)/urdf/6dof_imu.xacro"/>
     
-    <link name="odom"/>
+    <!-- <link name="map"/>
+
+    <joint name="map_to_odom" type="fixed">
+        <parent link="map"/>
+        <child link="odom"/>
+    </joint>
+
+    <link name="odom"/> -->
 
     <xacro:rhodent_chassis 
         name = "base" 
@@ -45,7 +52,14 @@
         prefix = "top" 
         parent = "base_link" 
         offset_from_parent = "${CHASSIS_TO_LIDAR}"
+        visualize = "false"
+        color = "dark_grey"
+        topic = "/rhodent/scan"/>
+    <xacro:imu
+        prefix = "main" 
+        parent = "base_link" 
+        offset_from_parent = "${CHASSIS_TO_IMU}"
         visualize = "true"
-        color = "dark_grey"/>
+        topic = "/rhodent/imu"/>
 
 </robot>

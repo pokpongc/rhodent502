@@ -1,0 +1,13 @@
+<launch>
+    <include file="$(find rhodent_gazebo)/launch/rhodent_simple_world.launch">
+    </include> 
+
+    <node name="cartographer_node" pkg="cartographer_ros"
+        type="cartographer_node" args="
+            -configuration_directory $(find rhodent_navigation)/config
+            -configuration_basename mapping_config.lua"
+        output="screen">
+    </node>
+
+    <node name="cartographer_occupancy_grid_node" pkg="cartographer_ros" type="cartographer_occupancy_grid_node" args="-resolution 0.01" />
+</launch>

@@ -9,7 +9,7 @@
 
 	<arg name="debug" default="false"/>
 
-	<arg name="world" default="$(find gazebo_ros)/worlds/empty_world.world"/>
+	<arg name="world" default="$(find gazebo_ros)/launch/empty_world.launch"/>
 
 	<arg name="model" default="$(find rhodent_description)/urdf/rhodent.xacro"/>
 
@@ -17,23 +17,34 @@
 
 	<param name="robot_description" command="$(find xacro)/xacro --inorder $(arg model)" />
 
-	<include file="$(find gazebo_ros)/launch/empty_world.launch">
+	<include file="$(find rhodent_gazebo)/launch/empty_world.launch">
 		<arg name="world_name" value="$(arg world)"/>
 		<arg name="debug" value="$(arg debug)" />
 		<arg name="gui" value="$(arg gui)" />
 		<arg name="paused" value="$(arg paused)"/>
 		<arg name="use_sim_time" value="$(arg use_sim_time)"/>
 		<arg name="headless" value="$(arg headless)"/>
+		<remap from="/rhodent/imu" to="/imu" />
+		<remap from="/rhodent/top_laser/scan" to="/laser_scan" />
 	</include>
+
+	<!-- <param name="/use_sim_time" value="true"/>
+	<node name="gazebo" pkg="gazebo_ros" type="gazebo" args="$(arg world)" respawn="false" output="screen">
+		<remap from="/rhodent/imu" to="/imu" />
+		<remap from="/rhodent/top_laser/scan" to="/scan" />
+	</node>
+	<node name="gazebo_gui" pkg="gazebo_ros" type="gzclient" respawn="false" output="screen" required="false"/> -->
 
 	<node name="urdf_spawner" 
 		pkg="gazebo_ros" 
 		type="spawn_model" 
 		respawn="false"
 		output="screen"
-		args="-urdf -model rhodent -param robot_description"/>
+		args="-urdf -model rhodent -param robot_description -z 1"/>
 
-	<node name="diff_kinematics" pkg="rhodent_core" type="diff_kinematics.py"/>
+	<remap from="/rhodent/odom" to="/odom" />
+
+	<node name="diff_kinematics" pkg="rhodent_navigation" type="diff_kinematics.py"/>
 
 	<node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="false"/>
 

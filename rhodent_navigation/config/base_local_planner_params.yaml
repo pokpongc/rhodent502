@@ -1,0 +1,33 @@
+controller_frequency: 10.0
+
+TrajectoryPlannerROS:
+  global_frame_id: map
+  # realmax 0.43,2
+  max_vel_x: 1
+  min_vel_x: -1
+  max_vel_theta: 2
+  min_vel_theta: -2
+  min_in_place_vel_theta: 0
+  escape_vel: -0.1
+
+  acc_lim_theta: 100
+  acc_lim_x: 100
+  acc_lim_y: 100
+
+
+  sim_period: 0.1
+  holonomic_robot: false
+  meter_scoring: true
+  gdist_scale: 3.0
+  occdist_scale: 1.0
+
+  xy_goal_tolerance: 0.15
+  yaw_goal_tolerance: 0.17
+  latch_xy_goal_tolerance: false
+
+  sim_time: 1.5
+  sim_granularity: 0.025
+  angular_sim_granularity: 0.025
+  vx_samples: 20
+  vtheta_samples: 20
+

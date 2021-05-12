@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<robot name="imu" xmlns:xacro="http://www.ros.org/wiki/xacro">
+    
+    <xacro:include filename="$(find rhodent_description)/urdf/rhodent_properties.xacro" />
+    
+    <xacro:macro name="imu" params="prefix parent offset_from_parent visualize topic">
+        <joint name="${prefix}_imu_joint" type="fixed">
+            <origin xyz="${offset_from_parent}" rpy="0 0 0"/>
+            <parent link="${parent}"/>
+            <child link="${prefix}_imu_link"/>
+        </joint>
+        
+        <link name="${prefix}_imu_link"/>
+
+        <gazebo reference="${prefix}_imu_link">
+            <gravity>true</gravity>
+            <sensor name="imu_sensor" type="imu">
+            <always_on>true</always_on>
+            <update_rate>60</update_rate>
+            <visualize>${visualize}</visualize>
+            <topic>__default_topic__</topic>
+            <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
+                <topicName>${topic}</topicName>
+                <bodyName>${prefix}_imu_link</bodyName>
+                <updateRateHZ>60.0</updateRateHZ>
+                <gaussianNoise>0.005</gaussianNoise>
+                <xyzOffset>0 0 0</xyzOffset>
+                <rpyOffset>0 0 0</rpyOffset>
+                <frameName>${prefix}_imu_link</frameName>
+                <initialOrientationAsReference>false</initialOrientationAsReference>
+            </plugin>
+            <pose>0 0 0 0 0 0</pose>
+            </sensor>
+        </gazebo>
+
+    </xacro:macro>
+</robot>
