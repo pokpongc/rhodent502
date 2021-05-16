@@ -36,7 +36,9 @@ def getchar(): #codeforester stackoverflow
 def listen_thread():
     global send
     while (1):
-        if getchar()==' ':
+        if getchar()=='q':
+            sys.exit()
+        elif getchar()==' ':
             send = 1
         else:
             send = 0
