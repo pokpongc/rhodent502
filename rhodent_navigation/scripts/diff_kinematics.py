@@ -19,7 +19,7 @@ rospy.init_node('diff_kinematics')
 CENTER_TO_WHEEL = 0.101
 WHEEL_RADIUS = 0.03225
 
-dt = 1/60.0
+dt = 1/100.0
 sum_theta = 0
 sum_x = 0
 sum_y = 0
@@ -49,8 +49,8 @@ def odom_callback(joint_states):
     vl = lwh * WHEEL_RADIUS
     vr = rwh * WHEEL_RADIUS
 
-    v = (vr+vl)/2
-    theta_dot = (vr-vl)/(2*CENTER_TO_WHEEL)
+    v = (vr+vl)/2.0
+    theta_dot = (vr-vl)/(2.0*CENTER_TO_WHEEL)
     sum_theta = sum_theta + theta_dot*dt 
     x_dot = v*cos(sum_theta)
     y_dot = v*sin(sum_theta)

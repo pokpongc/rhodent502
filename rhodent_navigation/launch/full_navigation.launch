@@ -1,8 +1,10 @@
 <launch>
 
-    <include file="$(find rhodent_navigation)/launch/realtime_mapping.launch">
+    <include file="$(find rhodent_navigation)/launch/pure_localization.launch">
     </include> 
 
     <include file="$(find rhodent_navigation)/launch/move_base.launch">
     </include> 
+
+    <node name="room_navigator" pkg="rhodent_navigation" type="room_navigation.py"/>
 </launch>

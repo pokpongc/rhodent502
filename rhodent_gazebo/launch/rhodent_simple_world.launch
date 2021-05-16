@@ -9,7 +9,7 @@
 
 	<arg name="debug" default="false"/>
 
-	<arg name="world" default="$(find gazebo_ros)/launch/empty_world.launch"/>
+	<arg name="world" default="$(find rhodent_gazebo)/worlds/apartment.world"/>
 
 	<arg name="model" default="$(find rhodent_description)/urdf/rhodent.xacro"/>
 
@@ -61,7 +61,6 @@
 	<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
 		respawn="false" 
 		output="screen"
-		ns = "rhodent">
-	</node>
+		ns = "rhodent"/>
 
 </launch>

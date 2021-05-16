@@ -18,17 +18,20 @@ options = {
   num_subdivisions_per_laser_scan = 1,
   num_point_clouds = 0,
   lookup_transform_timeout_sec = 1,
-  submap_publish_period_sec = 0.03,
-  pose_publish_period_sec = 10e-3,
+  submap_publish_period_sec = 0.3,
+  pose_publish_period_sec = 0.01,
   trajectory_publish_period_sec = 30e-3,
   rangefinder_sampling_ratio = 1.,
-  odometry_sampling_ratio = 0.1,
+  odometry_sampling_ratio = 0.4,
   fixed_frame_pose_sampling_ratio = 1.,
   imu_sampling_ratio = 1.,
   landmarks_sampling_ratio = 1.,
 }
 
 MAP_BUILDER.use_trajectory_builder_2d = true
+TRAJECTORY_BUILDER_2D.min_range = 0.1
+TRAJECTORY_BUILDER_2D.max_range = 12.
 TRAJECTORY_BUILDER_2D.num_accumulated_range_data = 1
+POSE_GRAPH.optimize_every_n_nodes = 10
 
 return options

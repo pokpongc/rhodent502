@@ -1,0 +1,10 @@
+living /1e-10/
+kitchen /1e-10/
+dining /1e-10/
+corridor /1e-30/
+office /1e-20/
+bed /1e-2/
+store /1e-25/
+
+go /1e-1/
+come /1e-1/

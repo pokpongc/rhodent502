@@ -1,0 +1,39 @@
+<launch>
+
+	<arg name="paused" default="false"/>
+
+	<arg name="use_sim_time" default="true"/>
+
+	<arg name="gui" default="true"/>
+
+	<arg name="headless" default="false"/>
+
+	<arg name="debug" default="false"/>
+
+	<arg name="world" default="$(find rhodent_gazebo)/worlds/apartment.world"/>
+
+	<!-- <arg name="model" default="$(find rhodent_description)/urdf/rhodent.xacro"/> -->
+
+	<arg name="rvizconfig" default="$(find rhodent_description)/rviz/rhodent_simple.rviz" />
+
+	<include file="$(find rhodent_gazebo)/launch/empty_world.launch">
+		<arg name="world_name" value="$(arg world)"/>
+		<arg name="debug" value="$(arg debug)" />
+		<arg name="gui" value="$(arg gui)" />
+		<arg name="paused" value="$(arg paused)"/>
+		<arg name="use_sim_time" value="$(arg use_sim_time)"/>
+		<arg name="headless" value="$(arg headless)"/>
+	</include>
+
+	<arg name="model" default="$(find cob_gazebo_objects)/objects/picture_bodegon.urdf "/>
+
+	<param name="model_description" command="$(find xacro)/xacro.py $(arg model)" />
+
+	<node name="urdf_spawner" 
+		pkg="gazebo_ros" 
+		type="spawn_model" 
+		respawn="false"
+		output="screen"
+		args="-urdf -model picture_bodegon -param model_description"/>
+
+</launch>
