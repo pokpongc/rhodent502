@@ -7,7 +7,7 @@
   <!-- One maintainer tag required, multiple allowed, one person per tag -->
   <!-- Example:  -->
   <!-- <maintainer email="jane.doe@example.com">Jane Doe</maintainer> -->
-  <maintainer email="pokpong@todo.todo">pokpong</maintainer>
+  <maintainer email="cyy.thanapong@gmail.com">pokpong</maintainer>
 
 
   <!-- One license tag required, multiple allowed, one license per tag -->
@@ -50,6 +50,7 @@
   <!--   <doc_depend>doxygen</doc_depend> -->
   <buildtool_depend>catkin</buildtool_depend>
   <depend>pocketsphinx</depend>
+  <depend>pygame</depend>
   <depend>rospy</depend>
   <depend>rospkg</depend>
   <depend>pyaudio</depend>
