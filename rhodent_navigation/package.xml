@@ -49,6 +49,16 @@
   <!-- Use doc_depend for packages you need only for building documentation: -->
   <!--   <doc_depend>doxygen</doc_depend> -->
   <buildtool_depend>catkin</buildtool_depend>
+  <depend>rospy</depend>
+  <depend>cartographer_ros</depend>
+  <depend>cartographer</depend>
+  <depend>cartographer_ros_msgs</depend>
+  <depend>cartographer_rviz</depend>
+  <depend>move_base</depend>
+  <depend>move_base_msgs</depend>
+  <depend>std_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>anytree</depend>
 
 
   <!-- The export tag contains other, unspecified, tags -->

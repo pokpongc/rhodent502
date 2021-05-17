@@ -7,9 +7,11 @@ from anytree import Node, RenderTree, Walker
 #import ros msgs
 from geometry_msgs.msg import Twist, Point, Pose, Quaternion, Vector3
 from std_msgs.msg import String
+from visualization_msgs.msg import Marker, MarkerArray
 from move_base_msgs.msg import MoveBaseActionGoal
 
 goal_publisher = rospy.Publisher('/move_base/goal', MoveBaseActionGoal, queue_size=10)
+marker_publisher = rospy.Publisher('/rhodent/via_points', MarkerArray, queue_size=10)
 
 room_list = ["corridor", "storage", "dining", "kitchen", "living_room", "bed_room", "office"]
 
@@ -45,6 +47,8 @@ rospy.init_node("room_navigation")
 
 listener = tf.TransformListener()
 
+
+
 def get_path(here, togo):
     path_here = str(here).split("\'")[1].split("/")[1:]
     path_togo = str(togo).split("\'")[1].split("/")[1:]
@@ -76,6 +80,30 @@ def room_nav_callback(togo):
         val, idx = min((val, idx) for (idx, val) in enumerate(distsq))
         here_room = room_list[idx]
         exec("path = get_path({}, {})".format(here_room, togo.data))
+        via_points_marker = MarkerArray()
+        for num,viapoint in enumerate(path):
+            msize = via_point_tol if num != len(path)-1 else goal_tol
+            mbl = 1 if num != len(path)-1 else 0
+            mgr = 0 if num != len(path)-1 else 1
+            exec('marker_point ='+viapoint+'_point')
+            marker = Marker()
+            marker.id = num
+            marker.header.frame_id = "/map"
+            marker.type = marker.SPHERE
+            marker.action = marker.ADD
+            marker.scale.x = msize*2
+            marker.scale.y = msize*2
+            marker.scale.z = msize*2
+            marker.color.a = 0.2
+            marker.color.r = 0.0
+            marker.color.g = mgr
+            marker.color.b = mbl
+            marker.pose.orientation.w = 1.0
+            marker.pose.position.x = marker_point[0]
+            marker.pose.position.y = marker_point[1]
+            marker.pose.position.z = 0
+            via_points_marker.markers.append(marker)
+        marker_publisher.publish(via_points_marker)
         for viapoint in path:
             exec('goal_point ='+viapoint+'_point')
             print (viapoint, goal_point)

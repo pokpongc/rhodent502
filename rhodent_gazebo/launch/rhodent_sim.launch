@@ -9,7 +9,7 @@
 
 	<arg name="debug" default="false"/>
 
-	<arg name="world" default="$(find rhodent_gazebo)/worlds/apartment.world"/>
+	<arg name="world" default="$(find gazebo_ros)/worlds/empty_world.world"/>
 
 	<arg name="model" default="$(find rhodent_description)/urdf/rhodent.xacro"/>
 
@@ -25,22 +25,15 @@
 		<arg name="use_sim_time" value="$(arg use_sim_time)"/>
 		<arg name="headless" value="$(arg headless)"/>
 		<remap from="/rhodent/imu" to="/imu" />
-		<remap from="/rhodent/top_laser/scan" to="/laser_scan" />
-	</include>
-
-	<!-- <param name="/use_sim_time" value="true"/>
-	<node name="gazebo" pkg="gazebo_ros" type="gazebo" args="$(arg world)" respawn="false" output="screen">
-		<remap from="/rhodent/imu" to="/imu" />
 		<remap from="/rhodent/top_laser/scan" to="/scan" />
-	</node>
-	<node name="gazebo_gui" pkg="gazebo_ros" type="gzclient" respawn="false" output="screen" required="false"/> -->
+	</include>
 
 	<node name="urdf_spawner" 
 		pkg="gazebo_ros" 
 		type="spawn_model" 
 		respawn="false"
 		output="screen"
-		args="-urdf -model rhodent -param robot_description -z 1"/>
+		args="-urdf -model rhodent_robot -param robot_description -z 1"/>
 
 	<remap from="/rhodent/odom" to="/odom" />
 

@@ -1,5 +1,6 @@
 <launch>
-    <include file="$(find rhodent_gazebo)/launch/rhodent_simple_world.launch">
+    <include file="$(find rhodent_gazebo)/launch/rhodent_sim.launch">
+        <arg name="world" value="$(find rhodent_gazebo)/worlds/apartment.world"/>
     </include> 
 
     <node name="cartographer_node" pkg="cartographer_ros"
