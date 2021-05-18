@@ -8,6 +8,7 @@ Panels:
         - /TF1/Frames1
         - /Sensors1
         - /Navigation1
+        - /Navigation1/Local Path1
       Splitter Ratio: 0.5
     Tree Height: 841
   - Class: rviz/Selection
@@ -310,21 +311,6 @@ Visualization Manager:
           Unreliable: false
           Value: true
         - Alpha: 1
-          Axes Length: 1
-          Axes Radius: 0.10000000149011612
-          Class: rviz/Pose
-          Color: 255; 25; 0
-          Enabled: false
-          Head Length: 0.30000001192092896
-          Head Radius: 0.10000000149011612
-          Name: Goal
-          Shaft Length: 1
-          Shaft Radius: 0.05000000074505806
-          Shape: Arrow
-          Topic: /move_base/current_goal
-          Unreliable: false
-          Value: false
-        - Alpha: 1
           Buffer Length: 1
           Class: rviz/Path
           Color: 164; 0; 0
@@ -347,6 +333,21 @@ Visualization Manager:
           Topic: /move_base/NavfnROS/plan
           Unreliable: false
           Value: true
+        - Alpha: 1
+          Axes Length: 1
+          Axes Radius: 0.10000000149011612
+          Class: rviz/Pose
+          Color: 255; 25; 0
+          Enabled: false
+          Head Length: 0.30000001192092896
+          Head Radius: 0.10000000149011612
+          Name: Goal
+          Shaft Length: 1
+          Shaft Radius: 0.05000000074505806
+          Shape: Arrow
+          Topic: /move_base/current_goal
+          Unreliable: false
+          Value: false
       Enabled: true
       Name: Navigation
   Enabled: true
@@ -386,11 +387,11 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Scale: 25.419464111328125
+      Scale: 38.539894104003906
       Target Frame: <Fixed Frame>
       Value: TopDownOrtho (rviz)
-      X: -2.44975209236145
-      Y: 1.829870343208313
+      X: -0.17897570133209229
+      Y: 8.704485893249512
     Saved: ~
 Window Geometry:
   Displays:
@@ -409,4 +410,4 @@ Window Geometry:
     collapsed: false
   Width: 1604
   X: 1817
-  Y: 303
+  Y: 183

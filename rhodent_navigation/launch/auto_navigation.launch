@@ -1,6 +1,7 @@
 <launch>
+    <arg name="localization_mode" default="realtime_mapping"/>
 
-    <include file="$(find rhodent_navigation)/launch/pure_localization.launch">
+    <include file="$(find rhodent_navigation)/launch/$(arg localization_mode).launch">
     </include> 
 
     <include file="$(find rhodent_navigation)/launch/move_base.launch">

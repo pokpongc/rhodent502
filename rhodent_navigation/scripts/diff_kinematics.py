@@ -19,10 +19,11 @@ rospy.init_node('diff_kinematics')
 CENTER_TO_WHEEL = 0.101
 WHEEL_RADIUS = 0.03225
 
-dt = 1/100.0
+# dt = 1/100.0
 sum_theta = 0
 sum_x = 0
 sum_y = 0
+prev_time = 0
 
 
 
@@ -42,6 +43,7 @@ def odom_callback(joint_states):
     global sum_theta
     global sum_x
     global sum_y
+    global prev_time
 
     lwh = joint_states.velocity[0]
     rwh = joint_states.velocity[1]
@@ -51,13 +53,15 @@ def odom_callback(joint_states):
 
     v = (vr+vl)/2.0
     theta_dot = (vr-vl)/(2.0*CENTER_TO_WHEEL)
+
+    time_now = joint_states.header.stamp.secs+joint_states.header.stamp.nsecs*1e-9
+    dt = time_now-prev_time
     sum_theta = sum_theta + theta_dot*dt 
     x_dot = v*cos(sum_theta)
     y_dot = v*sin(sum_theta)
 
     sum_x = sum_x + x_dot*dt
     sum_y = sum_y + y_dot*dt
-    print (dt, sum_x, sum_y)
 
     q = tf.transformations.quaternion_from_euler(0, 0, sum_theta)
     odom_broadcaster.sendTransform((sum_x, sum_y, 0), q, rospy.Time.now(), "base_footprint", "odom")
@@ -73,6 +77,8 @@ def odom_callback(joint_states):
     odom.child_frame_id = "base_footprint"
     odom.twist.twist = Twist(Vector3(x_dot,y_dot, 0), Vector3(0, 0, theta_dot))
     odom_publisher.publish(odom)
+
+    prev_time = time_now
 
 if __name__ == '__main__':
     try:

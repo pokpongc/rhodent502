@@ -5,6 +5,8 @@
 
 	<arg name="gui" default="true"/>
 
+	<arg name="z_initial" default="0"/> 
+
 	<arg name="headless" default="false"/>
 
 	<arg name="debug" default="false"/>
@@ -15,8 +17,9 @@
 
 	<arg name="rvizconfig" default="$(find rhodent_description)/rviz/rhodent_simple.rviz" />
 
-	<param name="robot_description" command="$(find xacro)/xacro --inorder $(arg model)" />
+	<param name="robot_description" command="$(find xacro)/xacro $(arg model)" />
 
+	<!-- launching Gazebo with remapped topics -->
 	<include file="$(find rhodent_gazebo)/launch/empty_world.launch">
 		<arg name="world_name" value="$(arg world)"/>
 		<arg name="debug" value="$(arg debug)" />
@@ -28,28 +31,32 @@
 		<remap from="/rhodent/top_laser/scan" to="/scan" />
 	</include>
 
+	<!-- spawn the robot -->
 	<node name="urdf_spawner" 
 		pkg="gazebo_ros" 
 		type="spawn_model" 
 		respawn="false"
 		output="screen"
-		args="-urdf -model rhodent_robot -param robot_description -z 1"/>
+		args="-urdf -model rhodent_robot -param robot_description -z $(arg z_initial)"/>
 
-	<remap from="/rhodent/odom" to="/odom" />
-
+	<!-- this node calculate wheels' velocity from twist command and publish odom -->
 	<node name="diff_kinematics" pkg="rhodent_navigation" type="diff_kinematics.py"/>
+
+	<!-- remap for cartographer node -->
+	<remap from="/rhodent/odom" to="/odom" />
 
 	<node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="false"/>
 
+	<!-- load controller parameters -->
 	<rosparam file="$(find rhodent_gazebo)/config/controller.yaml" command="load"/>
 
+	<!-- initialize controllers -->
 	<node name="controller_spawner" pkg="controller_manager" type="spawner" 
 		respawn="false"
 		output="screen" ns="/rhodent" 
 		args="joint_state_controller
 		right_wheel_velocity_controller
 		left_wheel_velocity_controller"/>
-
 
 	<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
 		respawn="false" 

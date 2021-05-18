@@ -1,11 +1,8 @@
 <launch>
 
-    <include file="$(find rhodent_navigation)/launch/pure_localization.launch">
+    <include file="$(find rhodent_navigation)/launch/auto_navigation.launch">
+        <arg name="localization_mode" value="pure_localization"/>
     </include> 
 
-    <include file="$(find rhodent_navigation)/launch/move_base.launch">
-    </include> 
-
-    <node name="room_navigator" pkg="rhodent_navigation" type="room_navigation.py"/>
     <node name="voice_parser" pkg="rhodent_interface" type="voice_command.py"/>
 </launch>
