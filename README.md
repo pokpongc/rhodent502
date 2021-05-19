@@ -26,6 +26,11 @@ Launching in voice command mode:
 roslaunch rhodent_navigation voice_navigation.launch
 ```
 
+Saving map:
+```bash
+rosservice call /write_state ${path_to_src}/rhodent502/rhodent_navigation/map/apartment_map.pbstream
+```
+
 ## ROS Topics
 ### High-level Control
 Action | ROS Topic | Message Type
@@ -49,3 +54,10 @@ Reading joints' position and velocity | /rhodent/joint_states | sensor_msgs/Join
 
 ## ROS Graph
 ![Alt text](/media/rosgraph.png?raw=true)
+
+## Resources
+- [Transformation Tree](https://github.com/pokpongc/rhodent502/blob/master/media/frames.pdf)
+- [Recorded Map (*.pbstream)](https://github.com/pokpongc/rhodent502/blob/master/rhodent_navigation/map/apartment_map.pbstream)
+- [Voice Command Weight File](https://github.com/pokpongc/rhodent502/tree/master/rhodent_interface/config)
+- [Navigation and Mapping Config Files](https://github.com/pokpongc/rhodent502/tree/master/rhodent_navigation/config)
+- [Low-level Controller Config File](https://github.com/pokpongc/rhodent502/blob/master/rhodent_gazebo/config/controller.yaml)
