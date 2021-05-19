@@ -1,6 +1,5 @@
 # Rhodent Mobile Robot Repository
-Thanapong Chuangyanyong
-For FRA502 "Mobile Robotics" 2020
+FRA502 "Mobile Robotics" 2020
 ## Dependencies
 - gazebo_ros
 - ros_control
