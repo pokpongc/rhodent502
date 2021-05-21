@@ -1,6 +1,7 @@
 # Rhodent Mobile Robot Repository
 FRA502 "Mobile Robotics" 2020
 ## Dependencies
+Tested on Ubuntu 18.04LTS (Bionic) with ROS Melodic Morenia
 - gazebo_ros
 - ros_control
 - cartographer_ros
